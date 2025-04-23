@@ -1,21 +1,15 @@
-using System.Collections;
+  using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace POC
 {
-    public class SampleAPI : MonoBehaviour
+    public static class SampleAPI
     {
-        // Start is called before the first frame update
-        void Start()
+        public static void PrintAPIMessage()
         {
-        
+            Debug.Log("Hello from the other side");
         }
 
-        // Update is called once per frame
-        void Update()
-        {
-        
-        }
     }
 }
