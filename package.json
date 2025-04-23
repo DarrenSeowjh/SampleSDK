@@ -1,0 +1,17 @@
+{
+    "name": "com.poc.samplesdk",
+    "version": "0.0.1",
+    "displayName": "Sample SDK POC",
+    "description": "POC for Sample SDK",
+    "unity": "2023.1",
+    "unityRelease": "10f1",
+
+    "author": {
+      "name": "",
+      "url": ""
+    },
+    "samples": [],
+    "dependencies": {
+      
+    }
+  }
