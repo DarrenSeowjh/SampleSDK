@@ -1,5 +1,5 @@
 {
-    "name": "poc.SampleSDKEditor",
+    "name": "poc.SampleSDK.Editor",
     "rootNamespace": "POC",
     "references": [
         "GUID:b00d1de5b7c644949b0973188d53382a"
