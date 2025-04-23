@@ -30,7 +30,8 @@ namespace POC
         public void OnThemeOptionChanged(ChangeEvent<System.Enum> evt)
         {
             SimpleRuntimeUI comp = target as SimpleRuntimeUI;
-            comp._theme = (UITheme)evt.newValue; 
+            comp.SetTheme((UITheme)evt.newValue);
+            //comp._theme = (UITheme)evt.newValue; 
         }
     }
 }
