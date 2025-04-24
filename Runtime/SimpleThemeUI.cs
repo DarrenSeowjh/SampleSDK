@@ -11,7 +11,7 @@ namespace POC
         NONE,
         POKEMON
     }
-    public class SimpleRuntimeUI : MonoBehaviour
+    public class SimpleThemeUI : MonoBehaviour
     {
         private Button _button;
         private Toggle _toggle;

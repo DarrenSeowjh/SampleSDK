@@ -8,12 +8,12 @@ using UnityEngine.UIElements;
 namespace POC
 {
 
-    [CustomEditor(typeof(SimpleRuntimeUI))]
-    public class SimpleCustomUI : Editor
+    [CustomEditor(typeof(SimpleThemeUI))]
+    public class SimpleThemeUIInspector : Editor
     {       
         public override VisualElement CreateInspectorGUI()
         {
-            SimpleRuntimeUI comp = target as SimpleRuntimeUI;
+            SimpleThemeUI comp = target as SimpleThemeUI;
             // Each editor window contains a root VisualElement object
             VisualElement root = new VisualElement();
 
@@ -21,7 +21,7 @@ namespace POC
             VisualElement label = new Label("Custom Inspector Created from C#");
             root.Add(label);
 
-            EnumField themeOption = new EnumField("Theme: ", comp._theme);
+            EnumField themeOption = new EnumField("UI Theme: ", comp._theme);
             var objectField = new ObjectField("Pokemon bg Texture");
             objectField.objectType = typeof(Texture2D);
             objectField.bindingPath = "pokemonBg";
@@ -34,12 +34,12 @@ namespace POC
         }
         public void OnBackgroundTextureChanged(ChangeEvent<Texture2D> evt)
         {
-            SimpleRuntimeUI comp = target as SimpleRuntimeUI;
+            SimpleThemeUI comp = target as SimpleThemeUI;
             comp.pokemonBg = evt.newValue;
         }
         public void OnThemeOptionChanged(ChangeEvent<System.Enum> evt)
         {
-            SimpleRuntimeUI comp = target as SimpleRuntimeUI;
+            SimpleThemeUI comp = target as SimpleThemeUI;
             comp.SetTheme((UITheme)evt.newValue);
             //comp._theme = (UITheme)evt.newValue; 
         }
