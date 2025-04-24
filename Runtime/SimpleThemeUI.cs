@@ -27,9 +27,9 @@ namespace POC
 
         public void SetInfoText(string text)
         {
+            infoText = text;
             if (info == null)
                 return;
-            infoText = text;
             info.text = text;
         }
         //Add logic that interacts with the UI controls in the `OnEnable` methods
@@ -60,6 +60,14 @@ namespace POC
                 default:
                     break;
             }
+        }
+        public UITheme GetTheme()
+        {
+            return _theme;
+        }
+        public string GetInfoText()
+        {
+            return infoText;
         }
         public void LoadThemeUI()
         {
