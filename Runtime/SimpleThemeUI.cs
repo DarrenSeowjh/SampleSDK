@@ -86,6 +86,8 @@ namespace POC
             }
             yesButton.RegisterCallback<ClickEvent>(OnYesClicked);
             noButton.RegisterCallback<ClickEvent>(OnNoClicked);
+
+            SetInfoText(infoText);
         }       
         private void OnNoClicked(ClickEvent evt)
         {
