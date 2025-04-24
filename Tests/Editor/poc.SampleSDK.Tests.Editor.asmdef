@@ -2,16 +2,20 @@
     "name": "poc.SampleSDK.Test.Editor",
     "rootNamespace": "",
     "references": [
-        "GUID:1dda9a10c5ed87846977c3be7522242f",
-        "GUID:b00d1de5b7c644949b0973188d53382a",
-        "GUID:27619889b8ba8c24980f49ee34dbb44a",
-        "GUID:0acc523941302664db1f4e527237feb3"
+        "poc.SampleSDK.Editor",
+        "poc.SampleSDK",
+        "UnityEngine.TestRunner",
+        "UnityEditor.TestRunner"
     ],
-    "includePlatforms": [],
+    "includePlatforms": [
+        "Editor"
+    ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
-    "precompiledReferences": [],
+    "precompiledReferences": [
+        "nunit.framework.dll"
+    ],
     "autoReferenced": true,
     "defineConstraints": [
         "UNITY_INCLUDE_TESTS"
