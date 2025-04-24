@@ -18,13 +18,13 @@ namespace POC
 
         public UITheme _theme; 
         private string inputStr;
-
-        private Texture2D pokemonBg;
+       
+        public Texture2D pokemonBg;
 
         private VisualElement root;
         private void Awake()
         {
-            pokemonBg = AssetDatabase.LoadAssetAtPath<Texture2D>("Packages/com.poc.samplesdk/Assets/Pikachu.jpg");
+            //pokemonBg = AssetDatabase.LoadAssetAtPath<Texture2D>("Packages/com.poc.samplesdk/Assets/Pikachu.jpg");
             root = GetComponent<UIDocument>().rootVisualElement;
         }
 
@@ -52,6 +52,8 @@ namespace POC
         public void SetTheme(UITheme theme)
         {
             _theme = theme;
+            if (root == null)
+                return;
             switch (_theme)
             {
                 case UITheme.NONE:
@@ -67,8 +69,9 @@ namespace POC
         public void LoadThemeUI()
         {
             // The UXML is already instantiated by the UIDocument component
-           // var root = GetComponent<UIDocument>().rootVisualElement;
-
+            // var root = GetComponent<UIDocument>().rootVisualElement;
+            root.style.height = 256;
+            root.style.width = 256;
             switch (_theme)
             {
                 case UITheme.NONE:
