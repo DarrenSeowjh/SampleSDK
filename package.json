@@ -10,7 +10,11 @@
       "name": "",
       "url": ""
     },
-    "samples": [],
+    "samples": [{
+      "displayName": "UI Showcase",
+      "description": "Showcase of Simple UI editing prefab in packages",
+      "path": "Samples~/SimpleUIDemo"
+    }],
     "dependencies": {
       
     }

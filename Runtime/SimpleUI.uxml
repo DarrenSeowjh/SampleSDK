@@ -1,9 +1,9 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:VisualElement name="Container" style="flex-grow: 1; width: 256px; height: 256px; max-width: 256px; max-height: 256px; align-self: center; align-items: center;">
-        <ui:Label tabindex="-1" text="Info" display-tooltip-when-elided="true" name="info" style="align-items: center; height: 185px; width: 256px;" />
+    <ui:VisualElement name="container" style="flex-grow: 1; width: 256px; height: 256px; max-width: 256px; max-height: 256px; align-self: center; align-items: center;">
+        <ui:Label tabindex="-1" text="Info" display-tooltip-when-elided="true" name="info" style="align-items: center; height: 185px; width: 256px; font-size: 28px; -unity-font-definition: url(&apos;project://database/Assets/Mapbox/Fonts/OpenSans-Regular.ttf?fileID=12800000&amp;guid=bd1ea67ca2b5742d1a24fcbdc17c55e1&amp;type=3#OpenSans-Regular&apos;);" />
         <ui:VisualElement name="option-buttons" style="flex-grow: 1; flex-direction: row;">
-            <ui:Button text="Button" display-tooltip-when-elided="true" name="yes-button" style="width: 90px; height: 50px; align-self: center; align-items: center; left: auto; margin-left: 20px; margin-right: 20px; justify-content: flex-start;" />
-            <ui:Button text="Button" display-tooltip-when-elided="true" name="no-button" style="width: 90px; height: 50px; align-self: center; align-items: center; left: auto; margin-left: 20px; margin-right: 20px;" />
+            <ui:Button text="Yes" display-tooltip-when-elided="true" name="yes-button" style="width: 90px; height: 50px; align-self: center; align-items: center; left: auto; margin-left: 20px; margin-right: 20px; justify-content: flex-start; background-color: rgb(35, 255, 46);" />
+            <ui:Button text="No" display-tooltip-when-elided="true" name="no-button" style="width: 90px; height: 50px; align-self: center; align-items: center; left: auto; margin-left: 20px; margin-right: 20px; background-color: rgb(255, 0, 0);" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
