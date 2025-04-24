@@ -13,21 +13,25 @@ namespace POC
     }
     public class SimpleThemeUI : MonoBehaviour
     {
-        private Button _button;
-        private Toggle _toggle;
-
         public UITheme _theme; 
-        private string inputStr;
        
         public Texture2D pokemonBg;
 
-        private VisualElement root;
-        private void Awake()
-        {
-            //pokemonBg = AssetDatabase.LoadAssetAtPath<Texture2D>("Packages/com.poc.samplesdk/Assets/Pikachu.jpg");
-            root = GetComponent<UIDocument>().rootVisualElement;
-        }
+        private VisualElement container;
 
+        private Button yesButton;
+        private Button noButton;
+
+        private Label info;
+        public string infoText;
+
+        public void SetInfoText(string text)
+        {
+            if (info == null)
+                return;
+            infoText = text;
+            info.text = text;
+        }
         //Add logic that interacts with the UI controls in the `OnEnable` methods
         private void OnEnable()
         {
@@ -36,31 +40,22 @@ namespace POC
 
         private void OnDisable()
         {
-            _button.UnregisterCallback<ClickEvent>(PrintClickMessage);
-        }
+            yesButton.UnregisterCallback<ClickEvent>(OnYesClicked);
+            noButton.UnregisterCallback<ClickEvent>(OnNoClicked);
 
-        private void PrintClickMessage(ClickEvent evt)
-        {
-            Debug.Log(inputStr);
-            SampleAPI.PrintAPIMessage();
-        }
-
-        public void InputMessage(ChangeEvent<string> evt)
-        {
-            inputStr = evt.newValue;
         }
         public void SetTheme(UITheme theme)
         {
             _theme = theme;
-            if (root == null)
+            if (container == null)
                 return;
             switch (_theme)
             {
                 case UITheme.NONE:
-                    root.style.backgroundImage = null;
+                    container.style.backgroundImage = null;
                     break;
                 case UITheme.POKEMON:
-                    root.style.backgroundImage = pokemonBg;
+                    container.style.backgroundImage = pokemonBg;
                     break;
                 default:
                     break;
@@ -70,42 +65,37 @@ namespace POC
         {
             // The UXML is already instantiated by the UIDocument component
             // var root = GetComponent<UIDocument>().rootVisualElement;
-            root.style.height = 256;
-            root.style.width = 256;
+            UIDocument uiDocument = GetComponent<UIDocument>();
+
+            container = uiDocument.rootVisualElement.Q("container");
+            info = container.Q("info") as Label;
+            VisualElement buttonContainer = container.Q("option-buttons");
+            yesButton = buttonContainer.Q("yes-button") as Button;
+            noButton = buttonContainer.Q("no-button") as Button;
+
             switch (_theme)
             {
                 case UITheme.NONE:
-                    root.style.backgroundImage = null;
+                    container.style.backgroundImage = null;
                     break;
                 case UITheme.POKEMON:                    
-                    root.style.backgroundImage = pokemonBg;
+                    container.style.backgroundImage = pokemonBg;
                     break;
                 default:
                     break;
             }
-
-            _toggle = new Toggle("Display Counter?");
-            root.Add(_toggle);
-
-           
-            
-            var _inputFields = new TextField();
-            _inputFields.RegisterCallback<ChangeEvent<string>>(InputMessage);
-            root.Add(_inputFields);
-
-            _button = CreateButton(root);
-            _button.RegisterCallback<ClickEvent>(PrintClickMessage);
-        }
-        private Button CreateButton(VisualElement root)
+            yesButton.RegisterCallback<ClickEvent>(OnYesClicked);
+            noButton.RegisterCallback<ClickEvent>(OnNoClicked);
+        }       
+        private void OnNoClicked(ClickEvent evt)
         {
-            Button button = new Button();
-
-            button.text = "This is a button";
-            button.style.width = new Length(50, LengthUnit.Percent);
-            button.style.alignSelf = Align.Center;
-            root.Add(button);
-
-            return button;
+            Debug.Log("No was clicked");
+            gameObject.SetActive(false);
+        }
+        private void OnYesClicked(ClickEvent evt)
+        {
+            Debug.Log("Yes was clicked");
+            gameObject.SetActive(false);
         }
     }
 }

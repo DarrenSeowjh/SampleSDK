@@ -16,32 +16,50 @@ namespace POC
             SimpleThemeUI comp = target as SimpleThemeUI;
             // Each editor window contains a root VisualElement object
             VisualElement root = new VisualElement();
-
-            // VisualElements objects can contain other VisualElement following a tree hierarchy.
-            VisualElement label = new Label("Custom Inspector Created from C#");
+            Label label = new Label("Simple Inspector editor created");
             root.Add(label);
-
-            EnumField themeOption = new EnumField("UI Theme: ", comp._theme);
+            CreateThemeTextureField(root);
+            CreateThemeField(root);
+            CreateInfoField(root);
+            return root;
+        }
+        private void CreateInfoField(VisualElement root)
+        {
+            var infoField = new TextField("Info Text: ");
+            infoField.bindingPath = "infoText";
+            infoField.RegisterCallback<ChangeEvent<string>>(OnInfoChange);
+            root.Add(infoField);
+        }
+        private void CreateThemeTextureField(VisualElement root)
+        {
             var objectField = new ObjectField("Pokemon bg Texture");
             objectField.objectType = typeof(Texture2D);
             objectField.bindingPath = "pokemonBg";
             objectField.RegisterCallback<ChangeEvent<Texture2D>>(OnBackgroundTextureChanged);
             root.Add(objectField);
-            themeOption.RegisterValueChangedCallback(OnThemeOptionChanged);
-            root.Add(themeOption);
-
-            return root;
         }
-        public void OnBackgroundTextureChanged(ChangeEvent<Texture2D> evt)
+        private void CreateThemeField(VisualElement root)
+        {
+            EnumField themeOption = new EnumField("UI Theme: ");
+            themeOption.bindingPath = "_theme";
+            root.Add(themeOption);
+            themeOption.RegisterValueChangedCallback(OnThemeOptionChanged);
+        }
+        private void OnBackgroundTextureChanged(ChangeEvent<Texture2D> evt)
         {
             SimpleThemeUI comp = target as SimpleThemeUI;
             comp.pokemonBg = evt.newValue;
         }
-        public void OnThemeOptionChanged(ChangeEvent<System.Enum> evt)
+        private void OnThemeOptionChanged(ChangeEvent<System.Enum> evt)
         {
             SimpleThemeUI comp = target as SimpleThemeUI;
             comp.SetTheme((UITheme)evt.newValue);
-            //comp._theme = (UITheme)evt.newValue; 
         }
+        private void OnInfoChange(ChangeEvent<string> evt)
+        {
+            SimpleThemeUI comp = target as SimpleThemeUI;
+            comp.SetInfoText(evt.newValue);
+        }
+
     }
 }
