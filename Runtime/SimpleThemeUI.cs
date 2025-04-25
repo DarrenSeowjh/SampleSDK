@@ -22,6 +22,7 @@ namespace POC
         private Button yesButton;
         private Button noButton;
 
+        private UIDocument uiDocument;
         private Label info;
         public string infoText;
 
@@ -31,6 +32,10 @@ namespace POC
             if (info == null)
                 return;
             info.text = text;
+        }
+        private void Awake()
+        {
+            uiDocument = GetComponent<UIDocument>();
         }
         //Add logic that interacts with the UI controls in the `OnEnable` methods
         private void OnEnable()
@@ -75,11 +80,11 @@ namespace POC
             // var root = GetComponent<UIDocument>().rootVisualElement;
             UIDocument uiDocument = GetComponent<UIDocument>();
 
-            container = uiDocument.rootVisualElement.Q("container");
-            info = container.Q("info") as Label;
-            VisualElement buttonContainer = container.Q("option-buttons");
-            yesButton = buttonContainer.Q("yes-button") as Button;
-            noButton = buttonContainer.Q("no-button") as Button;
+            container = GetContainer();
+            info = GetInfoLabel();
+           
+            yesButton = GetYesButton();
+            noButton = GetNoButton();
 
             switch (_theme)
             {
@@ -92,17 +97,79 @@ namespace POC
                 default:
                     break;
             }
-            yesButton.RegisterCallback<ClickEvent>(OnYesClicked);
-            noButton.RegisterCallback<ClickEvent>(OnNoClicked);
+           
 
             SetInfoText(infoText);
-        }       
-        private void OnNoClicked(ClickEvent evt)
+        }      
+        
+        public VisualElement GetContainer()
+        {
+            container = uiDocument.rootVisualElement.Q("container");
+            if (container == null)
+            {
+                container = new VisualElement();
+                container.name = "container";
+                uiDocument.rootVisualElement.Add(container);
+            }
+            return container;
+        }
+        public Label GetInfoLabel()
+        {
+            info = container.Q("info") as Label;
+            if (info == null)
+            {
+                info = new Label();
+                info.name = "info";
+                GetContainer().Add(info);
+            }
+            return info;
+        }
+        public VisualElement GetOptionButtonsContainer()
+        {
+            VisualElement buttonContainer = container.Q("option-buttons");
+            if(buttonContainer == null)
+            {
+                buttonContainer = new VisualElement();
+                buttonContainer.name = "option-buttons";
+                GetContainer().Add(buttonContainer);
+            }
+            return buttonContainer;
+        }
+        public Button GetYesButton()
+        {
+            VisualElement buttonContainer = GetOptionButtonsContainer();
+            Button yesButton = buttonContainer.Q("yes-button") as Button;
+            if (yesButton == null)
+            {
+                yesButton = new Button();
+                yesButton.name = "yes-button";
+                buttonContainer.Add(yesButton);
+            }
+            return yesButton;
+        }
+        public Button GetNoButton()
+        {
+            VisualElement buttonContainer = GetOptionButtonsContainer();
+            Button noButton = buttonContainer.Q("no-button") as Button;
+            if (noButton == null)
+            {
+                noButton = new Button();
+                noButton.name = "no-button";
+                buttonContainer.Add(noButton);
+            }
+            return noButton;
+        }
+        public void RegisterButtonCallbacks()
+        {
+            yesButton.RegisterCallback<ClickEvent>(OnYesClicked);
+            noButton.RegisterCallback<ClickEvent>(OnNoClicked);
+        }
+        public void OnNoClicked(ClickEvent evt)
         {
             Debug.Log("No was clicked");
             gameObject.SetActive(false);
         }
-        private void OnYesClicked(ClickEvent evt)
+        public void OnYesClicked(ClickEvent evt)
         {
             Debug.Log("Yes was clicked");
             gameObject.SetActive(false);
